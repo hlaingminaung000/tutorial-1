@@ -7,17 +7,15 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
-// const compiled= handlebars.compile("hello from {{name}} {{age}}");
-// const result=compiled({name: "hlaing min aung",age: 20});
-// console.log(`result`)
-// console.log(result)
 app.listen(3009,()=> console.log("Listening from 3009..."));
 
 db.query('select * from template').then(res=>{
-    const body=res[1].body;
+  console.log(`res`)
+  console.log(res)
+    const body=res[0].templateBody;
     const compiled= handlebars.compile(body);
-    const result=compiled({name: "hlaing min aung",age: 20});
+    const result=compiled({name: "Lin Gash"});
     const parsed=JSON.parse(result);
     const replaced = parsed.body.replace(/[``]+/g, '"');
-    console.log(replaced);
+    console.log(replaced)
 })
